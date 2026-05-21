@@ -26,7 +26,7 @@ jobs:
         run: npm install
 
       - name: Build project
-        run: sudo npm run build
+        run: npm run build
 
       - name: Upload dist to VPS
         uses: appleboy/scp-action@v0.1.7
