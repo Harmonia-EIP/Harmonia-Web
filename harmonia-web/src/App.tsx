@@ -184,7 +184,7 @@ const Landing = () => {
                     </p>
 
                     <div className="harmonia-cta-row">
-                        <a href="/downloads/Harmonia.zip" className="harmonia-btn">
+                        <a href="/downloads/release/Harmonia.zip" className="harmonia-btn">
                             <span
                                 className="harmonia-btn-glow"
                                 aria-hidden="true"
