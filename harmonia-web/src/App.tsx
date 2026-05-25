@@ -1,9 +1,17 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import { ArrowUpRight, Download } from "lucide-react";
 
 const Landing = () => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+    const [copied, setCopied] = useState(false);
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText("harmoniaeip@gmail.com");
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -155,16 +163,12 @@ const Landing = () => {
             <div className="harmonia-shell">
                 <nav className="harmonia-nav">
                     <div className="harmonia-brand">
-                        <span
-                            className="harmonia-brand-dot"
-                            aria-hidden="true"
-                        />
+                        <span className="harmonia-brand-dot" aria-hidden="true" />
                         <span>Harmonia / Audio</span>
                     </div>
 
                     <div className="harmonia-nav-meta">
-                        <span>v 0.1 beta</span>
-                        <span>VST3 · AU · CLAP</span>
+                        <span className="harmonia-version-badge">V0.1 BETA</span>
                     </div>
                 </nav>
 
@@ -178,35 +182,82 @@ const Landing = () => {
                     </h1>
 
                     <p className="harmonia-description">
-                        <strong>HARMONIA</strong> aims to automate preset
-                        generation for keyboards and synthesizers from
-                        simple text descriptions.
+                        Harmonia is an experimental AI system that generates synthesizer presets from
+                        simple text descriptions, turning human intent into sound. This is a first version (v1),
+                        still actively in development, currently based on a limited set of 20 parameters.
+                        While it already produces fully audible results, quality and consistency are still
+                        evolving and will improve as the system and parameter space expand over time.
                     </p>
 
+                    <div className="harmonia-stats">
+                        <div className="harmonia-stat">
+                            <span className="harmonia-stat-value">20</span>
+                            <span className="harmonia-stat-label">Parameters</span>
+                        </div>
+                        <div className="harmonia-stat-divider" />
+                        <div className="harmonia-stat">
+                            <span className="harmonia-stat-value">VST3</span>
+                            <span className="harmonia-stat-label">AU · CLAP</span>
+                        </div>
+                    </div>
+
                     <div className="harmonia-cta-row">
-                        <a href="/downloads/HarmoniaPlugin.vst3.zip/HarmoniaPlugin.vst3.zip" className="harmonia-btn">
-                            <span
-                                className="harmonia-btn-glow"
-                                aria-hidden="true"
-                            />
-
+                        <a
+                            href="/downloads/HarmoniaPlugin.vst3.zip/HarmoniaPlugin.vst3.zip"
+                            className="harmonia-btn"
+                        >
+                            <span className="harmonia-btn-glow" aria-hidden="true" />
                             <Download size={16} strokeWidth={2} />
-
                             <span>Download the plugin</span>
-
                             <ArrowUpRight
                                 size={16}
                                 strokeWidth={2}
                                 className="harmonia-btn-arrow"
                             />
                         </a>
+                    </div>
 
-                        <div className="harmonia-cta-meta">
-                            <span className="dot" />
-                            free · macOS · Windows
-                        </div>
+                    <div className="harmonia-warning">
+                        <span className="harmonia-warning-icon">⚠</span>
+                        Experimental version — Results are still evolving
                     </div>
                 </section>
+
+                {}
+                <div className="harmonia-synth-preview">
+                    <img
+                        src="/harmonia-v1-visual.png"
+                        alt="Harmonia synthesizer interface"
+                    />
+                </div>
+            </div>
+
+            {/* Fixed bottom-right actions */}
+            <div className="harmonia-fixed-actions">
+                <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSeE7oNkmBVWAf-z5cxT2ovFBj8Vac22H3rwelCz4S0trZHivA/viewform?usp=publish-editor"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="harmonia-action-btn harmonia-feedback-btn"
+                >
+                    <span className="harmonia-action-icon">⇗</span>
+                    Give Feedback
+                </a>
+
+                <div
+                    className="harmonia-action-btn harmonia-contact-btn harmonia-contact-hover"
+                    onClick={handleCopy}
+                >
+                    <span className="harmonia-action-icon">✉</span>
+
+                    <span className="harmonia-contact-text">
+                        {copied ? "Copied!" : "harmoniaeip@gmail.com"}
+                    </span>
+
+                    <div className="harmonia-contact-tooltip">
+                        {copied ? "Copied!" : "Click to copy"}
+                    </div>
+                </div>
             </div>
         </div>
     );
