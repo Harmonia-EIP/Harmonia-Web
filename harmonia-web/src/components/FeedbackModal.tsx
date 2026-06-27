@@ -2,16 +2,9 @@ import { useEffect, useState, type FormEvent } from "react";
 import { X, Send, CheckCircle2, AlertTriangle } from "lucide-react";
 import "./FeedbackModal.css";
 
-/**
- * Web3Forms access key — this is a *public* key, safe to ship in the bundle
- * (it only allows submitting to the inbox configured on web3forms.com).
- *
- * 1. Create a free access key at https://web3forms.com (linked to harmoniaeip@gmail.com)
- * 2. Either paste it below, or set VITE_WEB3FORMS_ACCESS_KEY in a .env file.
- */
 const WEB3FORMS_ACCESS_KEY =
     import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ||
-    "REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY";
+    "c47278f5-3754-46f9-8069-4fa5a6d07cec";
 
 const CATEGORIES = ["Bug", "Sound quality", "Feature idea", "Other"] as const;
 type Category = (typeof CATEGORIES)[number];
