@@ -1,0 +1,618 @@
+/* ─── PROJECT PAGE ────────────────────────────────────── */
+/* The landing root is overflow:hidden + viewport-locked; the project page
+   scrolls, so we relax those and pin the animated background to the viewport. */
+.hm-project {
+    overflow: visible;
+    height: auto;
+}
+
+.hm-project .harmonia-canvas,
+.hm-project .harmonia-grain,
+.hm-project .harmonia-vignette {
+    position: fixed;
+}
+
+.hm-project-shell {
+    position: relative;
+    z-index: 2;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 28px clamp(20px, 5vw, 56px) 80px;
+}
+
+/* ── NAV ───────────────────────────────────────────────── */
+.hm-project-nav {
+    margin-bottom: clamp(40px, 8vh, 90px);
+}
+
+.hm-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--hm-ink-dim);
+    font-family: "Azeret Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.25s ease, border-color 0.25s ease,
+        background 0.25s ease, transform 0.25s ease;
+}
+
+.hm-back-btn:hover {
+    color: var(--hm-ink);
+    border-color: rgba(78, 161, 255, 0.55);
+    background: rgba(78, 161, 255, 0.08);
+    transform: translateX(-2px);
+}
+
+/* ── HERO ──────────────────────────────────────────────── */
+.hm-project-hero {
+    max-width: 760px;
+    margin-bottom: 56px;
+}
+
+.hm-project-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 500;
+    font-size: clamp(46px, 7vw, 92px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    margin: 24px 0 28px;
+}
+
+.hm-project-title em {
+    font-style: normal;
+    font-weight: 300;
+    color: var(--hm-blue);
+    text-shadow: 0 0 24px rgba(78, 161, 255, 0.45),
+        0 0 60px rgba(78, 161, 255, 0.2);
+}
+
+.hm-project-lead {
+    font-size: clamp(15px, 1.2vw, 18px);
+    line-height: 1.8;
+    color: rgba(233, 236, 243, 0.74);
+    font-weight: 300;
+}
+
+/* ── METRICS CTA ───────────────────────────────────────── */
+.hm-metrics-cta {
+    position: relative;
+    margin-bottom: 80px;
+    border-radius: 22px;
+    border: 1px solid rgba(78, 161, 255, 0.3);
+    background: linear-gradient(
+        135deg,
+        rgba(43, 125, 255, 0.16) 0%,
+        rgba(78, 161, 255, 0.05) 50%,
+        rgba(10, 13, 24, 0.4) 100%
+    );
+    overflow: hidden;
+}
+
+.hm-metrics-glow {
+    position: absolute;
+    top: -40%;
+    right: -10%;
+    width: 60%;
+    height: 180%;
+    background: radial-gradient(
+        circle,
+        rgba(78, 161, 255, 0.28) 0%,
+        transparent 65%
+    );
+    filter: blur(20px);
+    pointer-events: none;
+}
+
+.hm-metrics-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding: clamp(28px, 4vw, 44px);
+    flex-wrap: wrap;
+}
+
+.hm-metrics-text {
+    max-width: 540px;
+}
+
+.hm-metrics-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Azeret Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--hm-blue);
+    margin-bottom: 14px;
+}
+
+.hm-metrics-heading {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: clamp(24px, 3vw, 34px);
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+}
+
+.hm-metrics-desc {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: rgba(233, 236, 243, 0.7);
+    font-weight: 300;
+}
+
+.hm-metrics-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    padding: 20px 32px;
+    border-radius: 999px;
+    border: 1px solid rgba(140, 190, 255, 0.6);
+    background: linear-gradient(180deg, #4ea1ff 0%, #2b7dff 100%);
+    color: #04101f;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 0 0 0 rgba(78, 161, 255, 0),
+        0 20px 50px -16px rgba(43, 125, 255, 0.8);
+    transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+        box-shadow 0.4s ease, filter 0.3s ease;
+}
+
+.hm-metrics-btn:hover {
+    transform: translateY(-3px) scale(1.015);
+    filter: brightness(1.06);
+    box-shadow: 0 0 50px rgba(78, 161, 255, 0.55),
+        0 28px 64px -18px rgba(43, 125, 255, 0.9);
+}
+
+.hm-metrics-btn:active {
+    transform: translateY(-1px);
+}
+
+/* ── GENERIC SECTION ───────────────────────────────────── */
+.hm-section {
+    margin-bottom: 72px;
+}
+
+.hm-section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--hm-line);
+}
+
+.hm-section-index {
+    font-family: "Azeret Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--hm-blue);
+}
+
+.hm-section-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 500;
+    font-size: clamp(22px, 2.6vw, 32px);
+    letter-spacing: -0.02em;
+}
+
+/* ── PIPELINE ──────────────────────────────────────────── */
+.hm-pipeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.hm-pipeline-step {
+    position: relative;
+    padding: 26px 22px;
+    border-radius: 16px;
+    border: 1px solid var(--hm-line);
+    background: rgba(255, 255, 255, 0.02);
+    transition: border-color 0.3s ease, background 0.3s ease,
+        transform 0.3s ease;
+}
+
+.hm-pipeline-step:hover {
+    border-color: rgba(78, 161, 255, 0.4);
+    background: rgba(78, 161, 255, 0.04);
+    transform: translateY(-3px);
+}
+
+.hm-pipeline-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    border: 1px solid rgba(78, 161, 255, 0.3);
+    background: rgba(78, 161, 255, 0.08);
+    color: var(--hm-blue);
+    margin-bottom: 16px;
+}
+
+.hm-pipeline-num {
+    font-family: "Azeret Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--hm-ink-dim);
+    margin-bottom: 8px;
+}
+
+.hm-pipeline-step h3 {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 9px;
+}
+
+.hm-pipeline-step p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(233, 236, 243, 0.62);
+    font-weight: 300;
+}
+
+.hm-pipeline-arrow {
+    position: absolute;
+    top: 50%;
+    right: -13px;
+    transform: translateY(-50%);
+    color: rgba(78, 161, 255, 0.55);
+    font-size: 20px;
+    z-index: 3;
+}
+
+/* ── ARCHITECTURE CARDS ────────────────────────────────── */
+.hm-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.hm-card {
+    padding: 30px 26px;
+    border-radius: 18px;
+    border: 1px solid var(--hm-line);
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.035) 0%,
+        rgba(255, 255, 255, 0.01) 100%
+    );
+    transition: border-color 0.3s ease, transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.hm-card:hover {
+    border-color: rgba(78, 161, 255, 0.45);
+    transform: translateY(-4px);
+    box-shadow: 0 24px 50px -24px rgba(43, 125, 255, 0.5);
+}
+
+.hm-card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    border: 1px solid rgba(78, 161, 255, 0.3);
+    background: rgba(78, 161, 255, 0.08);
+    color: var(--hm-blue);
+    margin-bottom: 20px;
+}
+
+.hm-card-tag {
+    font-family: "Azeret Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--hm-blue);
+}
+
+.hm-card-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    margin: 8px 0 14px;
+}
+
+.hm-card-text {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: rgba(233, 236, 243, 0.66);
+    font-weight: 300;
+    margin-bottom: 18px;
+}
+
+.hm-card-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.hm-card-list li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(233, 236, 243, 0.78);
+}
+
+.hm-card-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--hm-blue);
+    box-shadow: 0 0 8px rgba(78, 161, 255, 0.6);
+}
+
+/* ── FEATURES ──────────────────────────────────────────── */
+.hm-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.hm-feature-col {
+    padding: 26px 24px;
+    border-radius: 16px;
+    border: 1px solid var(--hm-line);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.hm-feature-head {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--hm-line);
+    color: var(--hm-blue);
+}
+
+.hm-feature-head h3 {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--hm-ink);
+    letter-spacing: -0.01em;
+}
+
+.hm-feature-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.hm-feature-col li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 13.5px;
+    color: rgba(233, 236, 243, 0.72);
+    font-weight: 300;
+}
+
+.hm-feature-col li::before {
+    content: "›";
+    position: absolute;
+    left: 0;
+    top: -1px;
+    color: var(--hm-blue);
+    font-size: 14px;
+}
+
+/* ── TECH STACK ────────────────────────────────────────── */
+.hm-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 11px;
+}
+
+.hm-stack-chip {
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.03);
+    color: rgba(233, 236, 243, 0.82);
+    font-family: "Azeret Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    transition: color 0.25s ease, border-color 0.25s ease,
+        background 0.25s ease, transform 0.25s ease;
+}
+
+.hm-stack-chip:hover {
+    color: #eaf3ff;
+    border-color: rgba(78, 161, 255, 0.5);
+    background: rgba(78, 161, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* ── REPOSITORIES ──────────────────────────────────────── */
+.hm-repos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.hm-repo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 22px;
+    border-radius: 14px;
+    border: 1px solid var(--hm-line);
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--hm-ink);
+    text-decoration: none;
+    transition: border-color 0.25s ease, background 0.25s ease,
+        transform 0.25s ease;
+}
+
+.hm-repo:hover {
+    border-color: rgba(78, 161, 255, 0.5);
+    background: rgba(78, 161, 255, 0.06);
+    transform: translateY(-3px);
+}
+
+.hm-repo > svg:first-child {
+    color: var(--hm-blue);
+    flex-shrink: 0;
+}
+
+.hm-repo-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.hm-repo-name {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.hm-repo-desc {
+    font-size: 12px;
+    line-height: 1.4;
+    color: rgba(233, 236, 243, 0.58);
+    font-weight: 300;
+}
+
+.hm-repo-arrow {
+    color: var(--hm-ink-dim);
+    flex-shrink: 0;
+    transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.hm-repo:hover .hm-repo-arrow {
+    color: var(--hm-blue);
+    transform: translate(2px, -2px);
+}
+
+/* ── FINAL CTA ─────────────────────────────────────────── */
+.hm-final-cta {
+    text-align: center;
+    padding: clamp(40px, 6vw, 64px) 24px;
+    border-radius: 22px;
+    border: 1px solid var(--hm-line);
+    background: radial-gradient(
+        100% 140% at 50% 0%,
+        rgba(43, 125, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.01) 60%
+    );
+    margin-bottom: 40px;
+}
+
+.hm-final-cta h2 {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3.4vw, 40px);
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+}
+
+.hm-final-cta p {
+    max-width: 560px;
+    margin: 0 auto 32px;
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(233, 236, 243, 0.7);
+    font-weight: 300;
+}
+
+.hm-final-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.hm-final-docs {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Azeret Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--hm-ink-dim);
+}
+
+.hm-final-docs a {
+    color: var(--hm-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(78, 161, 255, 0.3);
+    transition: border-color 0.25s ease;
+}
+
+.hm-final-docs a:hover {
+    border-color: var(--hm-blue);
+}
+
+/* ── FOOTER ────────────────────────────────────────────── */
+.hm-project-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 28px;
+    border-top: 1px solid var(--hm-line);
+    font-family: "Azeret Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--hm-ink-dim);
+}
+
+/* ── RESPONSIVE ────────────────────────────────────────── */
+@media (max-width: 920px) {
+    .hm-pipeline {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .hm-pipeline-arrow {
+        display: none;
+    }
+    .hm-cards,
+    .hm-features,
+    .hm-repos {
+        grid-template-columns: 1fr;
+    }
+    .hm-metrics-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 560px) {
+    .hm-pipeline {
+        grid-template-columns: 1fr;
+    }
+}

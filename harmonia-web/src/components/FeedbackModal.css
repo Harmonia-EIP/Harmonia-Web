@@ -1,0 +1,245 @@
+/* ─── FEEDBACK MODAL ──────────────────────────────────── */
+.hm-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(2, 3, 7, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    animation: hm-fade 0.25s ease forwards;
+}
+
+@keyframes hm-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.hm-modal {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 34px 32px 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(78, 161, 255, 0.22);
+    background: linear-gradient(
+        180deg,
+        rgba(14, 18, 32, 0.98) 0%,
+        rgba(8, 10, 18, 0.98) 100%
+    );
+    box-shadow:
+        0 0 80px rgba(43, 125, 255, 0.18),
+        0 40px 80px -24px rgba(0, 0, 0, 0.8);
+    color: var(--hm-ink);
+    transform: translateY(12px);
+    animation: hm-modal-in 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+@keyframes hm-modal-in {
+    to { transform: translateY(0); }
+}
+
+.hm-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--hm-ink-dim);
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.hm-modal-close:hover {
+    color: var(--hm-ink);
+    border-color: rgba(78, 161, 255, 0.5);
+    background: rgba(78, 161, 255, 0.1);
+}
+
+.hm-modal-eyebrow {
+    font-family: "Azeret Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--hm-blue);
+    margin-bottom: 10px;
+}
+
+.hm-modal-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 26px;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+}
+
+.hm-modal-sub {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: rgba(233, 236, 243, 0.62);
+    font-weight: 300;
+    margin-bottom: 22px;
+}
+
+.hm-field-label {
+    display: block;
+    font-family: "Azeret Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--hm-ink-dim);
+    margin: 18px 0 9px;
+}
+
+.hm-optional {
+    color: rgba(138, 145, 163, 0.55);
+    text-transform: none;
+    letter-spacing: 0.04em;
+}
+
+.hm-cat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.hm-cat-chip {
+    padding: 8px 15px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--hm-ink-dim);
+    font-family: "Azeret Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.hm-cat-chip:hover {
+    color: var(--hm-ink);
+    border-color: rgba(78, 161, 255, 0.4);
+}
+
+.hm-cat-chip.is-active {
+    color: #eaf3ff;
+    border-color: rgba(78, 161, 255, 0.7);
+    background: rgba(78, 161, 255, 0.16);
+    box-shadow: 0 0 16px rgba(78, 161, 255, 0.2);
+}
+
+.hm-input,
+.hm-textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(5, 7, 13, 0.6);
+    color: var(--hm-ink);
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hm-input::placeholder,
+.hm-textarea::placeholder {
+    color: rgba(138, 145, 163, 0.5);
+}
+
+.hm-input:focus,
+.hm-textarea:focus {
+    outline: none;
+    border-color: rgba(78, 161, 255, 0.65);
+    box-shadow: 0 0 0 3px rgba(78, 161, 255, 0.12);
+}
+
+.hm-modal-error {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(248, 113, 113, 0.35);
+    background: rgba(248, 113, 113, 0.08);
+    color: #fca5a5;
+    font-size: 12.5px;
+}
+
+.hm-modal-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    width: 100%;
+    margin-top: 24px;
+    padding: 14px 24px;
+    border-radius: 999px;
+    border: 1px solid rgba(78, 161, 255, 0.55);
+    background: linear-gradient(
+        180deg,
+        rgba(78, 161, 255, 0.22) 0%,
+        rgba(43, 125, 255, 0.1) 100%
+    );
+    color: #eaf3ff;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.3s ease, background 0.25s ease;
+}
+
+.hm-modal-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: linear-gradient(
+        180deg,
+        rgba(78, 161, 255, 0.34) 0%,
+        rgba(43, 125, 255, 0.18) 100%
+    );
+    box-shadow: 0 0 32px rgba(78, 161, 255, 0.32);
+}
+
+.hm-modal-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.hm-modal-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 14px 4px;
+    color: var(--hm-blue);
+}
+
+.hm-modal-success h3 {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--hm-ink);
+    margin: 16px 0 8px;
+}
+
+.hm-modal-success p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: rgba(233, 236, 243, 0.65);
+    font-weight: 300;
+    max-width: 320px;
+}
