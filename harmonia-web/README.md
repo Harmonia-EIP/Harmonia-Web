@@ -1,4 +1,33 @@
-# React + TypeScript + Vite
+# Harmonia — Web
+
+Landing site + project presentation for **Harmonia**, an Epitech Innovation
+Project (AI synth preset generator). Built with React + TypeScript + Vite.
+
+## Pages
+
+- **Home** (`/`) — landing page with the hero, plugin download and quick links.
+- **The Project** (`/#/project`) — full project presentation: how it works, the
+  three components (App / AI / Backend), features, tech stack, repositories, and
+  a big button to the live **metrics** dashboard
+  (`https://harmonia.mcoet.com/#overview`).
+
+Routing is hash-based, so the static build works on any host with no server
+config.
+
+## Feedback form (required setup)
+
+The in-site **Give Feedback** button opens a modal that emails submissions to
+`harmoniaeip@gmail.com` via [Web3Forms](https://web3forms.com) — there is no
+more Google Form. To make it deliver:
+
+1. Create a free Web3Forms access key tied to `harmoniaeip@gmail.com`.
+2. Copy `.env.example` to `.env` and set `VITE_WEB3FORMS_ACCESS_KEY`.
+
+Until a real key is set, the form renders but submitting shows an error.
+
+---
+
+## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -66,7 +95,6 @@ export default defineConfig([
         project: ['./tsconfig.node.json', './tsconfig.app.json'],
         tsconfigRootDir: import.meta.dirname,
       },
-      // other options...
     },
   },
 ])
