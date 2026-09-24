@@ -1,5 +1,6 @@
 import { ArrowUpRight, Download, BookOpen } from "lucide-react";
 import WavesCanvas from "./WavesCanvas";
+import "./Landing.css";
 
 type Props = {
     onNavigateProject: () => void;
@@ -7,7 +8,10 @@ type Props = {
 
 export default function Landing({ onNavigateProject }: Props) {
     return (
-        <div className="harmonia-root">
+        <div
+            className="harmonia-root harmonia-landing"
+            style={{ overflow: "visible" }}
+        >
             <WavesCanvas />
 
             <div className="harmonia-grain" aria-hidden="true" />
@@ -15,9 +19,17 @@ export default function Landing({ onNavigateProject }: Props) {
 
             <div className="harmonia-shell">
                 <nav className="harmonia-nav">
-                    <div className="harmonia-brand">
-                        <span className="harmonia-brand-dot" aria-hidden="true" />
-                        <span>Harmonia / Audio</span>
+                    <div className="harmonia-nav-left">
+                        <div className="harmonia-brand">
+                            <span className="harmonia-brand-dot" aria-hidden="true" />
+                            <span>Harmonia / Audio</span>
+                        </div>
+
+                        <span className="harmonia-nav-sep" aria-hidden="true" />
+
+                        <span className="harmonia-nav-tagline">
+                            AI Synth Preset Generator
+                        </span>
                     </div>
 
                     <div className="harmonia-nav-meta">
@@ -28,17 +40,21 @@ export default function Landing({ onNavigateProject }: Props) {
                         >
                             The Project
                         </button>
-                        <span className="harmonia-version-badge">V0.1 BETA</span>
                     </div>
                 </nav>
 
-                <section className="harmonia-hero">
-                    <div className="harmonia-eyebrow">
-                        AI Synth Preset Generator
-                    </div>
+                {/* Logo affiché dès le chargement, centré */}
+                <section className="harmonia-logo-section">
+                    <img
+                        src="/harmonia-logo.png"
+                        alt="Harmonia"
+                        className="harmonia-logo"
+                    />
+                </section>
 
+                <section className="harmonia-hero">
                     <h1 className="harmonia-title">
-                        Harm<em>o</em>nia.
+                        Harmonia.
                     </h1>
 
                     <p className="harmonia-description">
@@ -62,8 +78,8 @@ export default function Landing({ onNavigateProject }: Props) {
                     </div>
 
                     <div className="harmonia-cta-row">
-                        <a
-                            href="/downloads/HarmoniaPlugin.vst3.zip"
+                        
+                            <a href="/downloads/HarmoniaPlugin.vst3.zip"
                             className="harmonia-btn"
                         >
                             <span className="harmonia-btn-glow" aria-hidden="true" />
@@ -88,17 +104,19 @@ export default function Landing({ onNavigateProject }: Props) {
 
                     <div className="harmonia-warning">
                         <span className="harmonia-warning-icon">⚠</span>
-                        Experimental version — Results are still evolving
+                        V0.1 Beta · Experimental version — Results are still evolving
                     </div>
                 </section>
 
-                {}
                 <div className="harmonia-synth-preview">
                     <img
                         src="/harmonia-v1-visual.png"
                         alt="Harmonia synthesizer interface"
                     />
                 </div>
+
+                {/* Espace en bas pour pouvoir scroller plus haut : ajuste la hauteur */}
+                <div style={{ height: 70, flexShrink: 0 }} aria-hidden="true" />
             </div>
         </div>
     );
