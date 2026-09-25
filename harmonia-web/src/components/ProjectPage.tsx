@@ -379,43 +379,43 @@ export default function ProjectPage({ onNavigateHome, onOpenFeedback }: Props) {
             next version.
           </p>
           <div className="hm-final-actions">
-  
-            <a href="/downloads/HarmoniaPlugin.vst3.zip"
-            className="harmonia-btn"
-          >
-            <span className="harmonia-btn-glow" aria-hidden="true" />
-            <Download size={16} strokeWidth={2} />
-            <span>Download the plugin</span>
-            <ArrowUpRight
-              size={16}
-              strokeWidth={2}
-              className="harmonia-btn-arrow"
-            />
-          </a>
+            <a
+              href="/downloads/HarmoniaPlugin.vst3.zip"
+              className="harmonia-btn"
+            >
+              <span className="harmonia-btn-glow" aria-hidden="true" />
+              <Download size={16} strokeWidth={2} />
+              <span>Download the plugin</span>
+              <ArrowUpRight
+                size={16}
+                strokeWidth={2}
+                className="harmonia-btn-arrow"
+              />
+            </a>
 
-          
-            <a href="/downloads/HarmoniaPlugin.exe.zip"
-            className="harmonia-btn harmonia-btn--standalone"
-          >
-            <span className="harmonia-btn-glow" aria-hidden="true" />
-            <WindowsLogoIcon size={16} />
-            <span>Download standalone</span>
-            <ArrowUpRight
-              size={16}
-              strokeWidth={2}
-              className="harmonia-btn-arrow"
-            />
-          </a>
+            <a
+              href="/downloads/HarmoniaPlugin.exe.zip"
+              className="harmonia-btn harmonia-btn--standalone"
+            >
+              <span className="harmonia-btn-glow" aria-hidden="true" />
+              <WindowsLogoIcon size={16} />
+              <span>Download standalone</span>
+              <ArrowUpRight
+                size={16}
+                strokeWidth={2}
+                className="harmonia-btn-arrow"
+              />
+            </a>
 
-          <button
-            type="button"
-            className="harmonia-btn-ghost"
-            onClick={onOpenFeedback}
-          >
-            <MessageSquare size={16} strokeWidth={2} />
-            <span>Give feedback</span>
-          </button>
-        </div>
+            <button
+              type="button"
+              className="harmonia-btn-ghost"
+              onClick={onOpenFeedback}
+            >
+              <MessageSquare size={16} strokeWidth={2} />
+              <span>Give feedback</span>
+            </button>
+          </div>
 
           <div className="hm-final-docs">
             <BookOpen size={14} strokeWidth={1.8} />
