@@ -333,13 +333,14 @@
 }
 
 .hm-card-tag {
+  display: block;
+  margin-top: 6px;
   font-family: 'Azeret Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--hm-blue);
 }
-
 .hm-card-title {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
@@ -633,5 +634,29 @@
 @media (max-width: 560px) {
   .hm-pipeline {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .hm-final-actions {
+    flex-wrap: wrap;
+  }
+
+  .hm-final-actions .harmonia-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 12px;
+  }
+
+  .hm-final-actions .harmonia-btn span {
+    white-space: normal;
+  }
+
+  .hm-final-actions .harmonia-btn-ghost {
+    flex: 0 0 75%;
+    width: 100%;
+    justify-content: center;
   }
 }

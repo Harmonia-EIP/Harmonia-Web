@@ -6,6 +6,23 @@ type Props = {
   onNavigateProject: () => void
 }
 
+function WindowsLogoIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+    >
+      <rect x="2" y="2" width="9" height="9" fill="currentColor" />
+      <rect x="13" y="2" width="9" height="9" fill="currentColor" />
+      <rect x="2" y="13" width="9" height="9" fill="currentColor" />
+      <rect x="13" y="13" width="9" height="9" fill="currentColor" />
+    </svg>
+  )
+}
+
 export default function Landing({ onNavigateProject }: Props) {
   return (
     <div
@@ -32,13 +49,14 @@ export default function Landing({ onNavigateProject }: Props) {
             </span>
           </div>
 
-          <div className="harmonia-nav-meta">
+          <div className="harmonia-nav-meta harmonia-nav-meta--desktop">
             <button
               type="button"
-              className="harmonia-nav-link"
+              className="harmonia-nav-discover"
               onClick={onNavigateProject}
             >
-              The Project
+              <BookOpen size={14} strokeWidth={2} />
+              <span>Discover the project</span>
             </button>
           </div>
         </nav>
@@ -77,7 +95,7 @@ export default function Landing({ onNavigateProject }: Props) {
             </div>
           </div>
 
-          <div className="harmonia-cta-row">
+          <div className="harmonia-cta-row harmonia-cta-row--triple">
             <a
               href="/downloads/HarmoniaPlugin.vst3.zip"
               className="harmonia-btn"
@@ -92,15 +110,29 @@ export default function Landing({ onNavigateProject }: Props) {
               />
             </a>
 
-            <button
-              type="button"
-              className="harmonia-btn-ghost"
-              onClick={onNavigateProject}
+            <a
+              href="/downloads/HarmoniaPlugin.exe.zip"
+              className="harmonia-btn harmonia-btn--standalone"
             >
-              <BookOpen size={16} strokeWidth={2} />
-              <span>Discover the project</span>
-            </button>
+              <span className="harmonia-btn-glow" aria-hidden="true" />
+              <WindowsLogoIcon size={16} />
+              <span>Download standalone</span>
+              <ArrowUpRight
+                size={16}
+                strokeWidth={2}
+                className="harmonia-btn-arrow"
+              />
+            </a>
           </div>
+
+          <button
+            type="button"
+            className="harmonia-nav-discover harmonia-nav-discover--mobile"
+            onClick={onNavigateProject}
+          >
+            <BookOpen size={16} strokeWidth={2} />
+            <span>Discover the project</span>
+          </button>
 
           <div className="harmonia-warning">
             <span className="harmonia-warning-icon">⚠</span>
