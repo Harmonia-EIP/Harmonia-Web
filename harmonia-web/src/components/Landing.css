@@ -387,7 +387,6 @@
         margin-right: auto;
     }
 
-    /* Boutons côte à côte, sans forcer un retour à la ligne */
     .harmonia-cta-row {
         flex-wrap: nowrap;
         justify-content: center;
