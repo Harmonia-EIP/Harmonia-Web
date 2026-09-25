@@ -5,298 +5,308 @@
 
 /* ─── ANIMATIONS PARTAGÉES ────────────────────────────── */
 @keyframes hm-pulse {
-    0%, 100% { opacity: 0.55; transform: scale(0.9); }
-    50%       { opacity: 1;    transform: scale(1.15); }
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
 }
 
 @keyframes hm-rise {
-    to { opacity: 1; transform: translateY(0); }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ─── STRUCTURE DE PAGE ───────────────────────────────── */
 .harmonia-root {
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
-    overflow: hidden;
-    background: radial-gradient(
-            120% 80% at 50% 0%,
-            #0c1224 0%,
-            var(--hm-bg-2) 45%,
-            var(--hm-bg) 100%
-        );
-    color: var(--hm-ink);
-    font-family: "IBM Plex Sans", system-ui, sans-serif;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: radial-gradient(
+    120% 80% at 50% 0%,
+    #0c1224 0%,
+    var(--hm-bg-2) 45%,
+    var(--hm-bg) 100%
+  );
+  color: var(--hm-ink);
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
 }
 
 .harmonia-canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .harmonia-grain {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.06;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
 .harmonia-vignette {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    background: radial-gradient(
-        80% 60% at 50% 50%,
-        transparent 40%,
-        rgba(0, 0, 0, 0.55) 100%
-    );
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    80% 60% at 50% 50%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
 }
 
 .harmonia-shell {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    padding: 28px clamp(20px, 5vw, 64px);
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 28px clamp(20px, 5vw, 64px);
 }
 
 /* ─── NAV ─────────────────────────────────────────────── */
 .harmonia-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: "Azeret Mono", monospace;
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--hm-ink-dim);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Azeret Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hm-ink-dim);
 }
 
 .harmonia-brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--hm-ink);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--hm-ink);
 }
 
 .harmonia-brand-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
-    background: var(--hm-blue);
-    box-shadow: 0 0 12px var(--hm-blue-glow);
-    animation: hm-pulse 2.4s ease-in-out infinite;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--hm-blue);
+  box-shadow: 0 0 12px var(--hm-blue-glow);
+  animation: hm-pulse 2.4s ease-in-out infinite;
 }
 
 .harmonia-nav-meta {
-    display: flex;
-    align-items: center;
-    gap: 18px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
 .harmonia-nav-link {
-    font-family: "Azeret Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--hm-ink-dim);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    transition: color 0.25s ease;
-    position: relative;
+  font-family: 'Azeret Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hm-ink-dim);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.25s ease;
+  position: relative;
 }
 
 .harmonia-nav-link::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    width: 0;
-    height: 1px;
-    background: var(--hm-blue);
-    transition: width 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 1px;
+  background: var(--hm-blue);
+  transition: width 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .harmonia-nav-link:hover {
-    color: var(--hm-ink);
+  color: var(--hm-ink);
 }
 
 .harmonia-nav-link:hover::after {
-    width: 100%;
+  width: 100%;
 }
 
 .harmonia-version-badge {
-    font-family: "Azeret Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    padding: 6px 16px;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: var(--hm-ink-dim);
-    background: rgba(255, 255, 255, 0.04);
+  font-family: 'Azeret Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--hm-ink-dim);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 /* Eyebrow : plus utilisé par la landing, gardé au cas où une autre page s'en sert */
 .harmonia-eyebrow {
-    font-family: "Azeret Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: var(--hm-blue);
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 28px;
-    opacity: 0;
-    transform: translateY(8px);
-    animation: hm-rise 0.9s 0.1s forwards cubic-bezier(0.2, 0.7, 0.2, 1);
+  font-family: 'Azeret Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--hm-blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: hm-rise 0.9s 0.1s forwards cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .harmonia-eyebrow::before {
-    content: "";
-    width: 28px;
-    height: 1px;
-    background: var(--hm-blue);
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--hm-blue);
 }
 
 /* ─── FIXED BOTTOM-RIGHT ACTIONS ─────────────────────── */
 .harmonia-fixed-actions {
-    position: fixed;
-    bottom: 28px;
-    right: 32px;
-    z-index: 100;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: flex-end;
+  position: fixed;
+  bottom: 28px;
+  right: 32px;
+  z-index: 100;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-end;
 }
 
 .harmonia-action-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    border-radius: 999px;
-    border: 1px solid rgba(78, 161, 255, 0.3);
-    background: rgba(5, 6, 10, 0.75);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    color: var(--hm-ink-dim);
-    font-family: "Azeret Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    text-decoration: none;
-    cursor: pointer;
-    transition:
-        color 0.25s ease,
-        border-color 0.25s ease,
-        background 0.25s ease,
-        box-shadow 0.3s ease,
-        transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(78, 161, 255, 0.3);
+  background: rgba(5, 6, 10, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: var(--hm-ink-dim);
+  font-family: 'Azeret Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.3s ease,
+    transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .harmonia-action-btn:hover {
-    color: var(--hm-ink);
-    border-color: rgba(78, 161, 255, 0.65);
-    background: rgba(78, 161, 255, 0.1);
-    box-shadow: 0 0 20px rgba(78, 161, 255, 0.18);
-    transform: translateY(-2px);
+  color: var(--hm-ink);
+  border-color: rgba(78, 161, 255, 0.65);
+  background: rgba(78, 161, 255, 0.1);
+  box-shadow: 0 0 20px rgba(78, 161, 255, 0.18);
+  transform: translateY(-2px);
 }
 
 .harmonia-action-icon {
-    font-size: 13px;
-    line-height: 1;
+  font-size: 13px;
+  line-height: 1;
 }
 
 /* Contact tooltip */
 .harmonia-contact-hover {
-    position: relative;
+  position: relative;
 }
 
 .harmonia-contact-tooltip {
-    position: absolute;
-    bottom: calc(100% + 10px);
-    right: 0;
-    background: rgba(10, 13, 24, 0.96);
-    border: 1px solid rgba(78, 161, 255, 0.35);
-    border-radius: 8px;
-    padding: 8px 14px;
-    font-family: "Azeret Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    color: var(--hm-blue);
-    white-space: nowrap;
-    pointer-events: none;
-    opacity: 0;
-    transform: translateY(6px);
-    transition:
-        opacity 0.2s ease,
-        transform 0.2s ease;
-    backdrop-filter: blur(8px);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: 0;
+  background: rgba(10, 13, 24, 0.96);
+  border: 1px solid rgba(78, 161, 255, 0.35);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-family: 'Azeret Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--hm-blue);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  backdrop-filter: blur(8px);
 }
 
 .harmonia-contact-tooltip::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    right: 24px;
-    border: 5px solid transparent;
-    border-top-color: rgba(78, 161, 255, 0.35);
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 24px;
+  border: 5px solid transparent;
+  border-top-color: rgba(78, 161, 255, 0.35);
 }
 
 .harmonia-contact-hover:hover .harmonia-contact-tooltip {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ─── RESPONSIVE (partagé) ────────────────────────────── */
 @media (max-width: 720px) {
-    .harmonia-version-badge {
-        display: none;
-    }
+  .harmonia-version-badge {
+    display: none;
+  }
 
-    .harmonia-fixed-actions {
-        bottom: 16px;
-        right: 16px;
-        left: 16px;
+  .harmonia-fixed-actions {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
 
-        flex-direction: row;
-        align-items: stretch;
-        gap: 8px;
-    }
+    flex-direction: row;
+    align-items: stretch;
+    gap: 8px;
+  }
 
-    .harmonia-action-btn {
-        flex: 1 1 0;
-        min-width: 0;
-        padding: 8px 10px;
-        font-size: 9.5px;
-        letter-spacing: 0.1em;
-        justify-content: center;
-    }
+  .harmonia-action-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 8px 10px;
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    justify-content: center;
+  }
 
-    .harmonia-action-icon {
-        font-size: 11px;
-    }
+  .harmonia-action-icon {
+    font-size: 11px;
+  }
 
-    .harmonia-contact-text {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
+  .harmonia-contact-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
-    .harmonia-contact-tooltip {
-        display: none;
-    }
+  .harmonia-contact-tooltip {
+    display: none;
+  }
 }
