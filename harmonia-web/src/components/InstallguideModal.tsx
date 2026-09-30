@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import './InstallGuideModal.css'
+import './InstallguideModal.css'
 
 /**
  * Modal du guide d'installation Harmonia (VST3 / Standalone).
