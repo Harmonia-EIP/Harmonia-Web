@@ -97,7 +97,7 @@ export default function Landing({ onNavigateProject }: Props) {
 
           <div className="harmonia-cta-row harmonia-cta-row--triple">
             <a
-              href="/downloads/HarmoniaPlugin.vst3.zip"
+              href="/downloads/Harmonia.vst3.zip"
               className="harmonia-btn"
             >
               <span className="harmonia-btn-glow" aria-hidden="true" />
@@ -111,7 +111,7 @@ export default function Landing({ onNavigateProject }: Props) {
             </a>
 
             <a
-              href="/downloads/HarmoniaPlugin.exe.zip"
+              href="/downloads/Harmonia.exe.zip"
               className="harmonia-btn harmonia-btn--standalone"
             >
               <span className="harmonia-btn-glow" aria-hidden="true" />
