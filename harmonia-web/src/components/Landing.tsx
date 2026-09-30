@@ -123,7 +123,6 @@ export default function Landing({ onNavigateProject }: Props) {
                 className="harmonia-btn-arrow"
               />
             </a>
-
           </div>
 
           <button
