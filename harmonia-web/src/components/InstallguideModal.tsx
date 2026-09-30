@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import "./InstallGuideModal.css";
 
@@ -94,15 +94,22 @@ const GUIDES: Record<Tab, Guide> = {
 const GAP = 12; // px entre les cartes
 const DRAG_START = 6; // px avant de considérer que c'est un swipe
 
-export default function InstallGuideModal({
-  open,
-  onClose,
-  defaultTab = "vst3",
-}: Props) {
+/**
+ * Wrapper : ne monte le contenu que lorsque la modale est ouverte.
+ * L'état interne (onglet, étape, drag) repart donc de zéro à chaque
+ * ouverture, sans avoir besoin de useEffect + setState.
+ */
+export default function InstallGuideModal(props: Props) {
+  if (!props.open) return null;
+  return <ModalContent {...props} />;
+}
+
+function ModalContent({ onClose, defaultTab = "vst3" }: Props) {
   const [tab, setTab] = useState<Tab>(defaultTab);
   const [step, setStep] = useState(0);
   const [dragX, setDragX] = useState(0);
   const [dragging, setDragging] = useState(false);
+  const [stride, setStride] = useState(0); // largeur d'une carte + gap
 
   const closeRef = useRef<HTMLButtonElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -112,13 +119,28 @@ export default function InstallGuideModal({
   const total = guide.steps.length;
   const isLast = step === total - 1;
 
-  // Largeur d'une carte + gap
-  const cardStride = () => {
-    const card = trackRef.current?.firstElementChild as HTMLElement | null;
-    return (card?.offsetWidth ?? 1) + GAP;
+  const goTo = (i: number) => setStep(Math.min(total - 1, Math.max(0, i)));
+
+  // Changement d'onglet : retour à la 1re carte (fait au clic, pas dans un effet)
+  const changeTab = (t: Tab) => {
+    setTab(t);
+    setStep(0);
+    setDragX(0);
+    setDragging(false);
   };
 
-  const goTo = (i: number) => setStep(Math.min(total - 1, Math.max(0, i)));
+  // Mesure la largeur d'une carte (le callback du ResizeObserver
+  // est appelé une première fois dès l'observation)
+  useLayoutEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => {
+      const card = el.firstElementChild as HTMLElement | null;
+      if (card) setStride(card.offsetWidth + GAP);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   // --- Swipe (souris, tactile, stylet) ---
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -150,7 +172,7 @@ export default function InstallGuideModal({
     if (!g.active) return;
 
     const dx = e.clientX - g.startX;
-    const threshold = Math.min(60, cardStride() * 0.15);
+    const threshold = Math.min(60, stride * 0.15);
     setDragging(false);
     setDragX(0);
     if (dx < -threshold) goTo(step + 1);
@@ -159,7 +181,6 @@ export default function InstallGuideModal({
 
   // Échap pour fermer, flèches pour naviguer, blocage du scroll de la page
   useEffect(() => {
-    if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowRight") goTo(step + 1);
@@ -174,21 +195,7 @@ export default function InstallGuideModal({
       document.removeEventListener("keydown", onKey);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, onClose, step, total]);
-
-  // À l'ouverture : onglet par défaut
-  useEffect(() => {
-    if (open) setTab(defaultTab);
-  }, [open, defaultTab]);
-
-  // À l'ouverture et à chaque changement d'onglet : retour à la 1re carte
-  useEffect(() => {
-    setStep(0);
-    setDragX(0);
-    setDragging(false);
-  }, [open, tab]);
-
-  if (!open) return null;
+  }, [onClose, step, total]);
 
   return createPortal(
     <div
@@ -223,7 +230,7 @@ export default function InstallGuideModal({
               role="tab"
               className="igm-tab"
               aria-selected={tab === key}
-              onClick={() => setTab(key)}
+              onClick={() => changeTab(key)}
             >
               {GUIDES[key].label}
             </button>
@@ -247,7 +254,7 @@ export default function InstallGuideModal({
               flexWrap: "nowrap",
               gap: GAP,
               width: "100%",
-              transform: `translateX(${-step * cardStride() + dragX}px)`,
+              transform: `translateX(${-step * stride + dragX}px)`,
             }}
           >
             {guide.steps.map((s: Step, i: number) => (
