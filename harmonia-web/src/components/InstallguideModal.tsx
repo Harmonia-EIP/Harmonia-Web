@@ -1,6 +1,6 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import "./InstallGuideModal.css";
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
+import './InstallGuideModal.css'
 
 /**
  * Modal du guide d'installation Harmonia (VST3 / Standalone).
@@ -14,85 +14,85 @@ import "./InstallGuideModal.css";
  * ou dans ton :root pour l'adapter au site.
  */
 
-type Tab = "vst3" | "standalone";
+type Tab = 'vst3' | 'standalone'
 
 type Step = {
-  title: string;
-  text: string;
-  rows?: [string, string][];
-};
+  title: string
+  text: string
+  rows?: [string, string][]
+}
 
 type Guide = {
-  label: string;
-  intro: string;
-  steps: Step[];
-  note: string;
-};
+  label: string
+  intro: string
+  steps: Step[]
+  note: string
+}
 
 type Props = {
-  open: boolean;
-  onClose: () => void;
-  defaultTab?: Tab;
-};
+  open: boolean
+  onClose: () => void
+  defaultTab?: Tab
+}
 
 const GUIDES: Record<Tab, Guide> = {
   vst3: {
-    label: "Plugin VST3",
-    intro: "À utiliser dans ton DAW (FL Studio, Ableton, Reaper…).",
+    label: 'Plugin VST3',
+    intro: 'À utiliser dans ton DAW (FL Studio, Ableton, Reaper…).',
     steps: [
       {
-        title: "Télécharger et extraire",
+        title: 'Télécharger et extraire',
         text: "Clique sur « DOWNLOAD THE PLUGIN » en haut de la page, puis extrais l'archive .zip.",
       },
       {
-        title: "Copier le .vst3 dans le dossier VST3",
-        text: "Place le fichier Harmonia.vst3 dans le dossier de ton système :",
+        title: 'Copier le .vst3 dans le dossier VST3',
+        text: 'Place le fichier Harmonia.vst3 dans le dossier de ton système :',
         rows: [
-          ["Windows", "C:\\Program Files\\Common Files\\VST3"],
-          ["macOS", "/Library/Audio/Plug-Ins/VST3"],
-          ["Linux", "~/.vst3"],
+          ['Windows', 'C:\\Program Files\\Common Files\\VST3'],
+          ['macOS', '/Library/Audio/Plug-Ins/VST3'],
+          ['Linux', '~/.vst3'],
         ],
       },
       {
-        title: "Rescanner les plugins dans ton DAW",
+        title: 'Rescanner les plugins dans ton DAW',
         text: "Relance l'analyse des plugins :",
         rows: [
-          ["FL Studio", "Options > Manage plugins > Find installed plugins"],
-          ["Ableton Live", "Preferences > Plug-ins > Rescan"],
-          ["Reaper", "Preferences > Plug-ins > VST > Re-scan"],
-          ["Cubase", "Studio > Plug-in Manager > Update"],
+          ['FL Studio', 'Options > Manage plugins > Find installed plugins'],
+          ['Ableton Live', 'Preferences > Plug-ins > Rescan'],
+          ['Reaper', 'Preferences > Plug-ins > VST > Re-scan'],
+          ['Cubase', 'Studio > Plug-in Manager > Update'],
         ],
       },
       {
-        title: "Ajouter Harmonia à ton projet",
+        title: 'Ajouter Harmonia à ton projet',
         text: "Ouvre le navigateur de plugins de ton DAW et ajoute Harmonia. C'est prêt.",
       },
     ],
     note: "Harmonia n'apparaît pas ? Vérifie que le .vst3 est bien sorti du .zip et dans un dossier scanné, puis redémarre le DAW.",
   },
   standalone: {
-    label: "Standalone",
-    intro: "Application autonome, sans DAW. Windows uniquement.",
+    label: 'Standalone',
+    intro: 'Application autonome, sans DAW. Windows uniquement.',
     steps: [
       {
         title: "Télécharger l'archive",
-        text: "Clique sur « DOWNLOAD STANDALONE » en haut de la page.",
+        text: 'Clique sur « DOWNLOAD STANDALONE » en haut de la page.',
       },
       {
-        title: "Extraire le .zip",
+        title: 'Extraire le .zip',
         text: "Clic droit sur l'archive, puis « Extraire tout… ».",
       },
       {
-        title: "Lancer Harmonia.exe",
-        text: "Double-clique sur Harmonia.exe dans le dossier extrait.",
+        title: 'Lancer Harmonia.exe',
+        text: 'Double-clique sur Harmonia.exe dans le dossier extrait.',
       },
     ],
-    note: "Si Windows affiche « Windows a protégé votre ordinateur », clique sur « Informations complémentaires » puis « Exécuter quand même ».",
+    note: 'Si Windows affiche « Windows a protégé votre ordinateur », clique sur « Informations complémentaires » puis « Exécuter quand même ».',
   },
-};
+}
 
-const GAP = 12; // px entre les cartes
-const DRAG_START = 6; // px avant de considérer que c'est un swipe
+const GAP = 12 // px entre les cartes
+const DRAG_START = 6 // px avant de considérer que c'est un swipe
 
 /**
  * Wrapper : ne monte le contenu que lorsque la modale est ouverte.
@@ -100,102 +100,106 @@ const DRAG_START = 6; // px avant de considérer que c'est un swipe
  * ouverture, sans avoir besoin de useEffect + setState.
  */
 export default function InstallGuideModal(props: Props) {
-  if (!props.open) return null;
-  return <ModalContent {...props} />;
+  if (!props.open) return null
+  return <ModalContent {...props} />
 }
 
-function ModalContent({ onClose, defaultTab = "vst3" }: Props) {
-  const [tab, setTab] = useState<Tab>(defaultTab);
-  const [step, setStep] = useState(0);
-  const [dragX, setDragX] = useState(0);
-  const [dragging, setDragging] = useState(false);
-  const [stride, setStride] = useState(0); // largeur d'une carte + gap
+function ModalContent({ onClose, defaultTab = 'vst3' }: Props) {
+  const [tab, setTab] = useState<Tab>(defaultTab)
+  const [step, setStep] = useState(0)
+  const [dragX, setDragX] = useState(0)
+  const [dragging, setDragging] = useState(false)
+  const [stride, setStride] = useState(0) // largeur d'une carte + gap
 
-  const closeRef = useRef<HTMLButtonElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const gesture = useRef<{ id: number; startX: number; active: boolean } | null>(null);
+  const closeRef = useRef<HTMLButtonElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const gesture = useRef<{
+    id: number
+    startX: number
+    active: boolean
+  } | null>(null)
 
-  const guide = GUIDES[tab];
-  const total = guide.steps.length;
-  const isLast = step === total - 1;
+  const guide = GUIDES[tab]
+  const total = guide.steps.length
+  const isLast = step === total - 1
 
-  const goTo = (i: number) => setStep(Math.min(total - 1, Math.max(0, i)));
+  const goTo = (i: number) => setStep(Math.min(total - 1, Math.max(0, i)))
 
   // Changement d'onglet : retour à la 1re carte (fait au clic, pas dans un effet)
   const changeTab = (t: Tab) => {
-    setTab(t);
-    setStep(0);
-    setDragX(0);
-    setDragging(false);
-  };
+    setTab(t)
+    setStep(0)
+    setDragX(0)
+    setDragging(false)
+  }
 
   // Mesure la largeur d'une carte (le callback du ResizeObserver
   // est appelé une première fois dès l'observation)
   useLayoutEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
+    const el = trackRef.current
+    if (!el) return
     const ro = new ResizeObserver(() => {
-      const card = el.firstElementChild as HTMLElement | null;
-      if (card) setStride(card.offsetWidth + GAP);
-    });
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
+      const card = el.firstElementChild as HTMLElement | null
+      if (card) setStride(card.offsetWidth + GAP)
+    })
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
 
   // --- Swipe (souris, tactile, stylet) ---
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (e.pointerType === "mouse" && e.button !== 0) return;
-    gesture.current = { id: e.pointerId, startX: e.clientX, active: false };
-  };
+    if (e.pointerType === 'mouse' && e.button !== 0) return
+    gesture.current = { id: e.pointerId, startX: e.clientX, active: false }
+  }
 
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    const g = gesture.current;
-    if (!g || g.id !== e.pointerId) return;
-    let dx = e.clientX - g.startX;
+    const g = gesture.current
+    if (!g || g.id !== e.pointerId) return
+    let dx = e.clientX - g.startX
 
     if (!g.active) {
-      if (Math.abs(dx) < DRAG_START) return;
-      g.active = true;
-      setDragging(true);
-      e.currentTarget.setPointerCapture(e.pointerId);
+      if (Math.abs(dx) < DRAG_START) return
+      g.active = true
+      setDragging(true)
+      e.currentTarget.setPointerCapture(e.pointerId)
     }
 
     // Résistance aux extrémités
-    if ((step === 0 && dx > 0) || (step === total - 1 && dx < 0)) dx *= 0.3;
-    setDragX(dx);
-  };
+    if ((step === 0 && dx > 0) || (step === total - 1 && dx < 0)) dx *= 0.3
+    setDragX(dx)
+  }
 
   const endDrag = (e: React.PointerEvent<HTMLDivElement>) => {
-    const g = gesture.current;
-    if (!g || g.id !== e.pointerId) return;
-    gesture.current = null;
-    if (!g.active) return;
+    const g = gesture.current
+    if (!g || g.id !== e.pointerId) return
+    gesture.current = null
+    if (!g.active) return
 
-    const dx = e.clientX - g.startX;
-    const threshold = Math.min(60, stride * 0.15);
-    setDragging(false);
-    setDragX(0);
-    if (dx < -threshold) goTo(step + 1);
-    else if (dx > threshold) goTo(step - 1);
-  };
+    const dx = e.clientX - g.startX
+    const threshold = Math.min(60, stride * 0.15)
+    setDragging(false)
+    setDragX(0)
+    if (dx < -threshold) goTo(step + 1)
+    else if (dx > threshold) goTo(step - 1)
+  }
 
   // Échap pour fermer, flèches pour naviguer, blocage du scroll de la page
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowRight") goTo(step + 1);
-      if (e.key === "ArrowLeft") goTo(step - 1);
-    };
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    document.addEventListener("keydown", onKey);
-    closeRef.current?.focus();
+      if (e.key === 'Escape') onClose()
+      if (e.key === 'ArrowRight') goTo(step + 1)
+      if (e.key === 'ArrowLeft') goTo(step - 1)
+    }
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    document.addEventListener('keydown', onKey)
+    closeRef.current?.focus()
     return () => {
-      document.body.style.overflow = prev;
-      document.removeEventListener("keydown", onKey);
-    };
+      document.body.style.overflow = prev
+      document.removeEventListener('keydown', onKey)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onClose, step, total]);
+  }, [onClose, step, total])
 
   return createPortal(
     <div
@@ -210,7 +214,9 @@ function ModalContent({ onClose, defaultTab = "vst3" }: Props) {
       >
         <div className="igm-head">
           <div>
-            <h2 className="igm-title" id="igm-title">Installer Harmonia</h2>
+            <h2 className="igm-title" id="igm-title">
+              Installer Harmonia
+            </h2>
             <p className="igm-sub">{guide.intro}</p>
           </div>
           <button
@@ -238,22 +244,22 @@ function ModalContent({ onClose, defaultTab = "vst3" }: Props) {
         </div>
 
         <div
-          className={`igm-viewport${dragging ? " igm-dragging" : ""}`}
+          className={`igm-viewport${dragging ? ' igm-dragging' : ''}`}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={endDrag}
           onPointerCancel={endDrag}
-          style={{ overflow: "hidden", touchAction: "pan-y" }}
+          style={{ overflow: 'hidden', touchAction: 'pan-y' }}
         >
           <div
             className="igm-track"
             ref={trackRef}
             style={{
-              display: "flex",
-              flexDirection: "row",
-              flexWrap: "nowrap",
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'nowrap',
               gap: GAP,
-              width: "100%",
+              width: '100%',
               transform: `translateX(${-step * stride + dragX}px)`,
             }}
           >
@@ -262,9 +268,15 @@ function ModalContent({ onClose, defaultTab = "vst3" }: Props) {
                 className="igm-card"
                 key={`${tab}-${s.title}`}
                 data-active={i === step}
-                style={{ flex: "0 0 100%", minWidth: 0, boxSizing: "border-box" }}
+                style={{
+                  flex: '0 0 100%',
+                  minWidth: 0,
+                  boxSizing: 'border-box',
+                }}
               >
-                <p className="igm-count">Étape {i + 1} sur {total}</p>
+                <p className="igm-count">
+                  Étape {i + 1} sur {total}
+                </p>
                 <h3>{s.title}</h3>
                 <p className="igm-text">{s.text}</p>
                 {s.rows && (
@@ -308,11 +320,11 @@ function ModalContent({ onClose, defaultTab = "vst3" }: Props) {
             className="igm-btn igm-btn--primary"
             onClick={() => (isLast ? onClose() : goTo(step + 1))}
           >
-            {isLast ? "Terminé" : "Suivant"}
+            {isLast ? 'Terminé' : 'Suivant'}
           </button>
         </div>
       </div>
     </div>,
-    document.body
-  );
+    document.body,
+  )
 }
