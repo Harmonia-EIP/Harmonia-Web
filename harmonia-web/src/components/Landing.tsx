@@ -117,10 +117,7 @@ export default function Landing({ onNavigateProject }: Props) {
           </div>
 
           <div className="harmonia-cta-row harmonia-cta-row--triple">
-            <a
-              href="/downloads/Harmonia.vst3.zip"
-              className="harmonia-btn"
-            >
+            <a href="/downloads/Harmonia.vst3.zip" className="harmonia-btn">
               <span className="harmonia-btn-glow" aria-hidden="true" />
               <Download size={16} strokeWidth={2} />
               <span>Download the plugin</span>
@@ -184,10 +181,7 @@ export default function Landing({ onNavigateProject }: Props) {
         <div style={{ height: 70, flexShrink: 0 }} aria-hidden="true" />
       </div>
 
-      <InstallGuideModal
-        open={guideOpen}
-        onClose={() => setGuideOpen(false)}
-      />
+      <InstallGuideModal open={guideOpen} onClose={() => setGuideOpen(false)} />
     </div>
   )
 }

@@ -661,10 +661,16 @@
     font-size: 15px;
   }
 
-  .harmonia-nav-meta--desktop .harmonia-nav-discover:hover .harmonia-expand-label,
-  .harmonia-nav-meta--desktop .harmonia-nav-discover:focus-visible .harmonia-expand-label,
+  .harmonia-nav-meta--desktop
+    .harmonia-nav-discover:hover
+    .harmonia-expand-label,
+  .harmonia-nav-meta--desktop
+    .harmonia-nav-discover:focus-visible
+    .harmonia-expand-label,
   .harmonia-nav-meta--desktop .harmonia-guide-btn:hover .harmonia-expand-label,
-  .harmonia-nav-meta--desktop .harmonia-guide-btn:focus-visible .harmonia-expand-label {
+  .harmonia-nav-meta--desktop
+    .harmonia-guide-btn:focus-visible
+    .harmonia-expand-label {
     grid-template-columns: 1fr;
     margin-left: 12px;
     opacity: 1;
@@ -674,10 +680,22 @@
       opacity 0.35s ease 0.1s; /* ouverture : fondu légèrement retardé */
   }
 
-  .harmonia-nav-meta--desktop .harmonia-nav-discover:hover .harmonia-expand-label > span,
-  .harmonia-nav-meta--desktop .harmonia-nav-discover:focus-visible .harmonia-expand-label > span,
-  .harmonia-nav-meta--desktop .harmonia-guide-btn:hover .harmonia-expand-label > span,
-  .harmonia-nav-meta--desktop .harmonia-guide-btn:focus-visible .harmonia-expand-label > span {
+  .harmonia-nav-meta--desktop
+    .harmonia-nav-discover:hover
+    .harmonia-expand-label
+    > span,
+  .harmonia-nav-meta--desktop
+    .harmonia-nav-discover:focus-visible
+    .harmonia-expand-label
+    > span,
+  .harmonia-nav-meta--desktop
+    .harmonia-guide-btn:hover
+    .harmonia-expand-label
+    > span,
+  .harmonia-nav-meta--desktop
+    .harmonia-guide-btn:focus-visible
+    .harmonia-expand-label
+    > span {
     transform: translateX(0);
   }
 }
