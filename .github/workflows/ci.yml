@@ -39,7 +39,7 @@ jobs:
         working-directory: harmonia-web
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.head_ref }}
 
@@ -71,7 +71,7 @@ jobs:
         working-directory: harmonia-web
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.head_ref }}
 
