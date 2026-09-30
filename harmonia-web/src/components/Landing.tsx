@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ArrowUpRight, Download, BookOpen, FileText } from 'lucide-react'
 import WavesCanvas from './WavesCanvas'
-import InstallGuideModal from './InstallGuideModal'
+import InstallGuideModal from './InstallguideModal'
 import './Landing.css'
 
 type Props = {
