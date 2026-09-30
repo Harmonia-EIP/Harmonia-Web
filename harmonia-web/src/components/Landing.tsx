@@ -1,9 +1,14 @@
-import { ArrowUpRight, Download, BookOpen } from 'lucide-react'
+import { useState } from 'react'
+import { ArrowUpRight, Download, BookOpen, FileText } from 'lucide-react'
 import WavesCanvas from './WavesCanvas'
+import InstallGuideModal from './InstallGuideModal'
 import './Landing.css'
 
 type Props = {
   onNavigateProject: () => void
+  // Plus utilisé : le bouton "User guide" ouvre maintenant la modal.
+  // Gardé optionnel pour ne pas casser App.tsx.
+  onNavigateGuide?: () => void
 }
 
 function WindowsLogoIcon({ size = 16 }: { size?: number }) {
@@ -24,6 +29,8 @@ function WindowsLogoIcon({ size = 16 }: { size?: number }) {
 }
 
 export default function Landing({ onNavigateProject }: Props) {
+  const [guideOpen, setGuideOpen] = useState(false)
+
   return (
     <div
       className="harmonia-root harmonia-landing"
@@ -56,7 +63,21 @@ export default function Landing({ onNavigateProject }: Props) {
               onClick={onNavigateProject}
             >
               <BookOpen size={14} strokeWidth={2} />
-              <span>Discover the project</span>
+              <span className="harmonia-expand-label">
+                <span>Discover the project</span>
+              </span>
+            </button>
+
+            <button
+              type="button"
+              className="harmonia-guide-btn"
+              onClick={() => setGuideOpen(true)}
+              aria-label="User guide"
+            >
+              <FileText size={18} strokeWidth={2} />
+              <span className="harmonia-expand-label">
+                <span>User guide</span>
+              </span>
             </button>
           </div>
         </nav>
@@ -125,14 +146,26 @@ export default function Landing({ onNavigateProject }: Props) {
             </a>
           </div>
 
-          <button
-            type="button"
-            className="harmonia-nav-discover harmonia-nav-discover--mobile"
-            onClick={onNavigateProject}
-          >
-            <BookOpen size={16} strokeWidth={2} />
-            <span>Discover the project</span>
-          </button>
+          <div className="harmonia-mobile-actions">
+            <button
+              type="button"
+              className="harmonia-nav-discover harmonia-nav-discover--mobile"
+              onClick={onNavigateProject}
+            >
+              <BookOpen size={16} strokeWidth={2} />
+              <span>Discover the project</span>
+            </button>
+
+            <button
+              type="button"
+              className="harmonia-guide-btn"
+              onClick={() => setGuideOpen(true)}
+              aria-label="User guide"
+            >
+              <FileText size={18} strokeWidth={2} />
+              <span className="harmonia-expand-label">User guide</span>
+            </button>
+          </div>
 
           <div className="harmonia-warning">
             <span className="harmonia-warning-icon">⚠</span>
@@ -150,6 +183,11 @@ export default function Landing({ onNavigateProject }: Props) {
         {/* Espace en bas pour pouvoir scroller plus haut : ajuste la hauteur */}
         <div style={{ height: 70, flexShrink: 0 }} aria-hidden="true" />
       </div>
+
+      <InstallGuideModal
+        open={guideOpen}
+        onClose={() => setGuideOpen(false)}
+      />
     </div>
   )
 }
