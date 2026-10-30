@@ -1,11 +1,16 @@
 import { useState } from 'react'
-import { ArrowUpRight, Download, BookOpen, FileText } from 'lucide-react'
+import { ArrowUpRight, Download, BookOpen, FileText, User } from 'lucide-react'
 import WavesCanvas from './WavesCanvas'
 import InstallGuideModal from './InstallguideModal'
+import type { Profile } from './accountApi'
 import './Landing.css'
 
 type Props = {
   onNavigateProject: () => void
+  /** Profil connecté (null si déconnecté) : sert au bouton compte de la nav. */
+  profile: Profile | null
+  /** Connecté : ouvre la page compte. Déconnecté : ouvre la modale de connexion. */
+  onAccountClick: () => void
   // Plus utilisé : le bouton "User guide" ouvre maintenant la modal.
   // Gardé optionnel pour ne pas casser App.tsx.
   onNavigateGuide?: () => void
@@ -28,8 +33,19 @@ function WindowsLogoIcon({ size = 16 }: { size?: number }) {
   )
 }
 
-export default function Landing({ onNavigateProject }: Props) {
+export default function Landing({
+  onNavigateProject,
+  profile,
+  onAccountClick,
+}: Props) {
   const [guideOpen, setGuideOpen] = useState(false)
+
+  const accountLabel = profile ? profile.username : 'Sign in'
+  const accountIcon = profile?.avatar_url ? (
+    <img className="am-nav-avatar" src={profile.avatar_url} alt="" />
+  ) : (
+    <User size={18} strokeWidth={2} />
+  )
 
   return (
     <div
@@ -77,6 +93,18 @@ export default function Landing({ onNavigateProject }: Props) {
               <FileText size={18} strokeWidth={2} />
               <span className="harmonia-expand-label">
                 <span>User guide</span>
+              </span>
+            </button>
+
+            <button
+              type="button"
+              className="harmonia-guide-btn"
+              onClick={onAccountClick}
+              aria-label={profile ? 'My account' : 'Sign in'}
+            >
+              {accountIcon}
+              <span className="harmonia-expand-label">
+                <span>{accountLabel}</span>
               </span>
             </button>
           </div>
@@ -161,6 +189,16 @@ export default function Landing({ onNavigateProject }: Props) {
             >
               <FileText size={18} strokeWidth={2} />
               <span className="harmonia-expand-label">User guide</span>
+            </button>
+
+            <button
+              type="button"
+              className="harmonia-guide-btn"
+              onClick={onAccountClick}
+              aria-label={profile ? 'My account' : 'Sign in'}
+            >
+              {accountIcon}
+              <span className="harmonia-expand-label">{accountLabel}</span>
             </button>
           </div>
 

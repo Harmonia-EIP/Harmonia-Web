@@ -1,0 +1,265 @@
+/* ─── ACCOUNT MODAL ───────────────────────────────────────
+   S'appuie sur les classes hm-modal-* de FeedbackModal.css. */
+
+.am-modal {
+  max-width: 480px;
+}
+
+/* Avatar rond (photo ou initiale) */
+.am-avatar {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgba(78, 161, 255, 0.4);
+  background: rgba(78, 161, 255, 0.1);
+  color: var(--hm-blue);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.am-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.am-avatar--lg {
+  width: 88px;
+  height: 88px;
+  font-size: 32px;
+}
+
+/* En-tête compte connecté */
+.am-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding-right: 40px; /* place pour le bouton fermer */
+}
+
+.am-head-text {
+  min-width: 0;
+}
+
+.am-head-name {
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.am-head-mail {
+  font-size: 12.5px;
+  color: var(--hm-ink-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Onglets segmentés */
+.am-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 4px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.am-tab {
+  flex: 1;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--hm-ink-dim);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.am-tab:hover {
+  color: var(--hm-ink);
+}
+
+.am-tab[aria-selected='true'] {
+  background: rgba(78, 161, 255, 0.16);
+  color: #eaf3ff;
+  box-shadow: inset 0 0 0 1px rgba(78, 161, 255, 0.45);
+}
+
+/* Deux champs côte à côte */
+.am-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.am-row > div {
+  min-width: 0;
+}
+
+/* Bloc avatar */
+.am-avatar-block {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.am-avatar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.am-chip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--hm-ink-dim);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 12.5px;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.am-chip-btn:hover {
+  color: var(--hm-ink);
+  border-color: rgba(78, 161, 255, 0.5);
+  background: rgba(78, 161, 255, 0.08);
+}
+
+.am-hint {
+  margin-top: 10px;
+  font-size: 12px;
+  color: rgba(138, 145, 163, 0.75);
+}
+
+/* Section sécurité */
+.am-section-title {
+  margin-top: 18px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+.am-divider {
+  margin: 26px 0 4px;
+  border: 0;
+  border-top: 1px solid var(--hm-line);
+}
+
+.am-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(78, 161, 255, 0.45);
+  background: rgba(78, 161, 255, 0.08);
+  color: #eaf3ff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.am-btn-secondary:hover:not(:disabled) {
+  background: rgba(78, 161, 255, 0.18);
+  box-shadow: 0 0 24px rgba(78, 161, 255, 0.22);
+}
+
+.am-btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Message de succès (pendant de .hm-modal-error) */
+.am-notice-ok {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(78, 161, 255, 0.4);
+  background: rgba(78, 161, 255, 0.1);
+  color: #bcd9ff;
+  font-size: 12.5px;
+}
+
+/* Déconnexion */
+.am-signout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin: 26px auto 0;
+  padding: 6px 4px;
+  border: 0;
+  background: none;
+  color: var(--hm-ink-dim);
+  font-family: 'Azeret Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.am-signout:hover {
+  color: #fca5a5;
+}
+
+/* Avatar dans le bouton de la nav (à côté de "User guide") */
+.harmonia-guide-btn .am-nav-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.am-modal button:focus-visible,
+.am-modal input:focus-visible {
+  outline: 2px solid var(--hm-blue);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .am-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .am-avatar-block {
+    gap: 14px;
+  }
+}

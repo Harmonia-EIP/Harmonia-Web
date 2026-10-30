@@ -236,7 +236,7 @@
     padding-right: 20px;
     gap: 10px;
     justify-content: center;
-    white-space: nowrap;   /* plus de retour à la ligne */
+    white-space: nowrap; /* plus de retour à la ligne */
     text-align: center;
   }
 
